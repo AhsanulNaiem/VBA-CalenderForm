@@ -18,7 +18,6 @@ Option Explicit
 
 Private Sub todayButton_Click()
 Me.currentMonth.caption = Date
-Me.Hide
 End Sub
 
 Private Sub CommandButton1_Click()
@@ -242,7 +241,6 @@ Me.todayButton.Left = Me.CommandButton1.Left + Me.CommandButton1.Width * 7 - Me.
 '===checkbox
 Me.CheckBox1.Left = Me.CommandButton1.Left
 '=======button caption
-    Dim a As Variant
 '==========set form width and height=========='
     Me.Width = Me.CommandButton1.Width * 8 + 10
 End Sub
@@ -286,9 +284,14 @@ Sub label_currentMonth()
 End Sub
 
 Function getDate() As Variant
+    label_currentMonth
     Me.Show
     If Me.CheckBox1.Value = True Then
-        getDate = Me.currentMonth.caption & " " & Time
+        If Me.currentMonth.caption <> "" Then
+            getDate = Me.currentMonth.caption & " " & Time
+        Else:
+            getDate = ""
+            End If
     Else:
         getDate = Me.currentMonth.caption
     End If
